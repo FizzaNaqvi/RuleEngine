@@ -1,0 +1,57 @@
+﻿<SKControls:SKWindow x:Class="WpfApp_PropertyGridPractice.MainWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxci="http://schemas.devexpress.com/winfx/2008/xaml/core/internal" 
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"     
+             xmlns:dxprg="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid"  
+             xmlns:SKControls="clr-namespace:Trafix.Client.Controls;assembly=Trafix.Client.Controls"
+             xmlns:local="clr-namespace:WpfApp_PropertyGridPractice.NewFolder1"
+             xmlns:ToolBar="clr-namespace:Trafix.Client.Controls.ToolBar;assembly=Trafix.Client.Controls"
+             mc:Ignorable="d"
+             Height="450" Width="800" >
+   
+    <SKControls:SKDockLayoutManager MDIMergeStyle="Never">
+        <SKControls:SKLayoutGroup Orientation="Vertical">
+            <SKControls:SKLayoutGroup Orientation="Horizontal">
+            <SKControls:SKLayoutPanel x:Name="pnlReport" ShowCaption="False" AllowClose="False" AllowHide="False">
+                <ToolBar:SKBarManager ToolbarGlyphSize="Small" AllowCustomization="False" >
+                        <SKControls:SKGrid x:Name="grd" AutoGenerateColumns="AddNew"  ItemsSource="{Binding Messages}" SelectionMode="Row" SelectionChanged="PGMsgDetails_SelectionChanged" >
+                    </SKControls:SKGrid>
+                </ToolBar:SKBarManager>
+            </SKControls:SKLayoutPanel>
+          
+            <SKControls:SKLayoutPanel x:Name="pnlMessageDetails" Caption="Message Description" >
+                <local:PropertyGridControl x:Name="PGMsgDetails" SelectedObject="{Binding ElementName=grd, Path=SelectedItem}" ShowCategories="True"  
+                                           ExpandCategoriesWhenSelectedObjectChanged="True" ShowDescriptionIn="ToolTipAndPanel" ShowMenuButtonInRows="False" AllowListItemInitializer="False" UseCollectionEditor="False"
+                                         >
+                </local:PropertyGridControl>
+            </SKControls:SKLayoutPanel>
+                <SKControls:SKLayoutPanel x:Name="pnlMessageDetailsUpdated" Caption="Message Description"   Visibility="Collapsed" >
+                <local:PropertyGridControl x:Name="PGMsgDetailsUpdated" SelectedObject="{Binding ElementName=grd, Path=SelectedItem}" ShowCategories="True"  
+                                         ExpandCategoriesWhenSelectedObjectChanged="True" ShowDescriptionIn="ToolTipAndPanel" ShowMenuButtonInRows="False" AllowListItemInitializer="False" UseCollectionEditor="False" >
+                </local:PropertyGridControl>
+            </SKControls:SKLayoutPanel>
+        </SKControls:SKLayoutGroup >
+            <SKControls:SKLayoutGroup Orientation="Vertical" AllowHide="False" AllowClose="False" >
+                <SKControls:SKLayoutPanel  Caption="Rules"  AllowClose="False" AllowHide="False">
+                    <!--<SKControls:SKRichTextBox x:Name="editor"></SKControls:SKRichTextBox>-->
+                    <avalonEdit:TextEditor
+    xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+    Name="editor"
+    FontFamily="Consolas"
+    SyntaxHighlighting="WPF"
+    FontSize="10pt"/>
+            </SKControls:SKLayoutPanel>
+
+                <SKControls:SKLayoutPanel x:Name="btn" Caption="Apply"  ShowCaption="False" AllowClose="False" AllowHide="False" ItemHeight="70">
+                    <Button Content="Apply Rules" Background="AliceBlue" FontWeight="Black"  MaxHeight="70" Click="Button_Click" ></Button>
+            </SKControls:SKLayoutPanel>
+        </SKControls:SKLayoutGroup>    
+        </SKControls:SKLayoutGroup>
+    </SKControls:SKDockLayoutManager>
+    <!--</Grid>-->
+</SKControls:SKWindow>
